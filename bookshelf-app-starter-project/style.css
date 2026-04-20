@@ -1,0 +1,217 @@
+/* Global Styles */
+:root {
+    --primary: #37546d;
+    --primary-hover: #2c4354;
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --danger: #dc2626;
+    --danger-hover: #b91c1c;
+    --success: #006400;
+    --success-hover: #004d00;
+    --warning: #d97706;
+    --warning-hover: #b45309;
+    --border: #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Content Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+}
+
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+section {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+section h2 {
+    font-size: 1.25rem;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Checkbox */
+form div:has(input[type="checkbox"]) {
+    flex-direction: row;
+    align-items: center;
+}
+
+label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+/* Form Style */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s;
+    background-color: #f9fafb;
+}
+
+input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+main section#inputBook,
+main section#bookSearch,
+main section#incompleteBookshelfList,
+main section#completeBookshelfList {
+    border-color: var(--border);
+    border: 2px solid var(--border);
+}
+
+/* Book List Styles */
+#incompleteBookList,
+#completeBookList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+[data-testid="bookItem"] {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+[data-testid="bookItem"]:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-testid="bookItemTitle"] {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+[data-testid="bookItemAuthor"],
+[data-testid="bookItemYear"] {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+[data-testid="bookItemYear"] {
+    margin-bottom: 1.25rem;
+}
+
+[data-testid="bookItem"]>div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+[data-testid="bookItem"] button {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    flex: 1;
+}
+
+/* Action Buttons */
+[data-testid="bookItemIsCompleteButton"] {
+    background-color: var(--success);
+}
+
+[data-testid="bookItemIsCompleteButton"]:hover {
+    background-color: var(--success-hover);
+}
+
+[data-testid="bookItemDeleteButton"] {
+    background-color: var(--danger);
+}
+
+[data-testid="bookItemDeleteButton"]:hover {
+    background-color: var(--danger-hover);
+}
+
+[data-testid="bookItemEditButton"] {
+    background-color: var(--warning);
+}
+
+[data-testid="bookItemEditButton"]:hover {
+    background-color: var(--warning-hover);
+}
