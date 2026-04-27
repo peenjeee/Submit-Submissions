@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { FiCheck } from "react-icons/fi";
+import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
+import { FiCheck } from 'react-icons/fi';
+import LanguageContext from '../contexts/LanguageContext';
+import useInput from '../hooks/useInput';
 
 function NoteInput({ addNote }) {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [title, onTitleChangeEventHandler] = useInput('');
+  const [body, setBody] = useState('');
+  const { locale } = useContext(LanguageContext);
 
-  const onTitleChangeHandler = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const onBodyInputHandler = (event) => {
+  const onBodyInputEventHandler = (event) => {
     setBody(event.target.innerHTML);
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitEventHandler = () => {
     addNote({ title, body });
   };
 
@@ -22,19 +21,18 @@ function NoteInput({ addNote }) {
     <div className="add-new-page__input">
       <input
         className="add-new-page__input__title"
-        type="text"
-        placeholder="Judul catatan ..."
+        placeholder={locale === 'id' ? 'Judul Catatan ...' : 'Note Title ...'}
         value={title}
-        onChange={onTitleChangeHandler}
+        onChange={onTitleChangeEventHandler}
       />
       <div
         className="add-new-page__input__body"
-        data-placeholder="Isi catatan ..."
         contentEditable
-        onInput={onBodyInputHandler}
+        data-placeholder={locale === 'id' ? 'Isi catatanmu disini ...' : 'Write your notes here ...'}
+        onInput={onBodyInputEventHandler}
       />
       <div className="add-new-page__action">
-        <button className="action" type="button" title="Simpan" onClick={onSubmitHandler}>
+        <button className="action" type="button" onClick={onSubmitEventHandler}>
           <FiCheck />
         </button>
       </div>

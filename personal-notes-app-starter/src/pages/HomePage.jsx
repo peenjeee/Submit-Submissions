@@ -1,88 +1,65 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useSearchParams } from "react-router-dom";
-import NotesList from "../components/NotesList";
-import SearchBar from "../components/SearchBar";
-import { getActiveNotes, deleteNote, archiveNote } from "../utils/local-data";
+import React, { useState, useEffect, useContext } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
+import { FiPlus } from 'react-icons/fi';
+import NotesList from '../components/NotesList';
+import SearchBar from '../components/SearchBar';
+import { getActiveNotes, deleteNote, archiveNote } from '../utils/network-data';
+import LanguageContext from '../contexts/LanguageContext';
 
-function HomePageWrapper() {
+function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const keyword = searchParams.get("keyword");
-  function changeSearchParams(keyword) {
-    setSearchParams(keyword ? { keyword } : {});
-  }
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const keyword = searchParams.get('keyword') || '';
+  const { locale } = useContext(LanguageContext);
+
+  useEffect(() => {
+    async function fetchNotes() {
+      const { data } = await getActiveNotes();
+      setNotes(data);
+      setLoading(false);
+    }
+    fetchNotes();
+  }, []);
+
+  const onKeywordChangeHandler = (keyword) => {
+    setSearchParams({ keyword });
+  };
+
+  const onDeleteHandler = async (id) => {
+    await deleteNote(id);
+    const { data } = await getActiveNotes();
+    setNotes(data);
+  };
+
+  const onArchiveHandler = async (id) => {
+    await archiveNote(id);
+    const { data } = await getActiveNotes();
+    setNotes(data);
+  };
+
+  const filteredNotes = notes.filter((note) => {
+    return note.title.toLowerCase().includes(keyword.toLowerCase());
+  });
 
   return (
-    <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+    <section className="homepage">
+      <h2 >{locale === 'id' ? 'Catatan Aktif' : 'Active Notes'}</h2>
+      <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
+      {loading ? (
+        <p className="loading-indicator">{locale === 'id' ? 'Memuat...' : 'Loading...'}</p>
+      ) : (
+        <NotesList notes={filteredNotes} onDelete={onDeleteHandler} onArchive={onArchiveHandler} />
+      )}
+      <div className="homepage__action">
+        <Link to="/notes/new">
+          <button className="action" type="button">
+            <FiPlus />
+          </button>
+        </Link>
+      </div>
+    </section>
   );
 }
 
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      notes: getActiveNotes(),
-      keyword: props.defaultKeyword || "",
-    };
-
-    this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onArchiveHandler = this.onArchiveHandler.bind(this);
-    this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
-  }
-
-  onDeleteHandler(id) {
-    deleteNote(id);
-
-    this.setState(() => {
-      return {
-        notes: getActiveNotes(),
-      };
-    });
-  }
-
-  onArchiveHandler(id) {
-    archiveNote(id);
-
-    this.setState(() => {
-      return {
-        notes: getActiveNotes(),
-      };
-    });
-  }
-
-  onKeywordChangeHandler(keyword) {
-    this.setState(() => {
-      return {
-        keyword,
-      };
-    });
-
-    this.props.keywordChange(keyword);
-  }
-
-  render() {
-    const notes = this.state.notes.filter((note) => {
-      return note.title
-        .toLowerCase()
-        .includes(this.state.keyword.toLowerCase());
-    });
-    return (
-      <section>
-        <h2>Catatan Aktif</h2>
-        <SearchBar
-          keyword={this.state.keyword}
-          keywordChange={this.onKeywordChangeHandler}
-        />
-        <NotesList notes={notes} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler} />
-      </section>
-    );
-  }
-}
-
-HomePage.propTypes = {
-  defaultKeyword: PropTypes.string,
-  keywordChange: PropTypes.func.isRequired,
-};
-
-export default HomePageWrapper;
+export default HomePage;
