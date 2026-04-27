@@ -1,19 +1,18 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { addNote } from "../utils/local-data";
-import NoteInput from "../components/NoteInput";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import NoteInput from '../components/NoteInput';
+import { addNote } from '../utils/network-data';
 
 function AddPage() {
   const navigate = useNavigate();
 
-  function onAddNoteHandler(note) {
-    addNote(note);
-    navigate("/");
+  async function onAddNoteHandler(note) {
+    await addNote(note);
+    navigate('/');
   }
 
   return (
-    <section>
-      <h2>Tambah Catatan Baru</h2>
+    <section className="add-new-page">
       <NoteInput addNote={onAddNoteHandler} />
     </section>
   );

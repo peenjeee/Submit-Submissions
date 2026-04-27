@@ -1,16 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import LanguageContext from '../contexts/LanguageContext';
 
 function SearchBar({ keyword, keywordChange }) {
+  const { locale } = useContext(LanguageContext);
+
   return (
-    <div className="search-bar">
+    <section className="search-bar">
       <input
         type="text"
-        placeholder="Cari catatan ..."
+        placeholder={locale === 'id' ? 'Cari berdasarkan judul ...' : 'Search by title ...'}
         value={keyword}
         onChange={(event) => keywordChange(event.target.value)}
       />
-    </div>
+    </section>
   );
 }
 
