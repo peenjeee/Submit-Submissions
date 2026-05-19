@@ -1,0 +1,27 @@
+{
+  "name": "openjob-consumer",
+  "version": "2.0.0",
+  "description": "OpenJob RabbitMQ Consumer",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "start:dev": "nodemon ./src/index.js",
+    "lint": "eslint ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.5",
+    "dotenv": "^17.2.3",
+    "nodemailer": "^7.0.10",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "nodemon": "^3.1.10"
+  }
+}
