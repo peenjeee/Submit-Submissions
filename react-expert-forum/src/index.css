@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-strong: var(--surface-strong);
+  --color-surface-base: var(--surface-base);
+  --color-border-strong: var(--border-strong);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+:root {
+  --background: #edeae4;
+  --foreground: #080909;
+  --card: #eeebe2;
+  --card-foreground: #080909;
+  --popover: #eeebe2;
+  --popover-foreground: #080909;
+  --primary: #080909;
+  --primary-foreground: #edeae4;
+  --secondary: #cce3e2;
+  --secondary-foreground: #080909;
+  --muted: #edeae4;
+  --muted-foreground: #484848;
+  --accent: #cce3e2;
+  --accent-foreground: #080909;
+  --destructive: #f43f5e;
+  --destructive-foreground: #fafafa;
+  --border: #dfd7ca;
+  --input: #dfd7ca;
+  --ring: #080909;
+  --radius: 0.75rem;
+
+  --surface-muted: #edeae4;
+  --surface-raised: #eeebe2;
+  --surface-strong: #cce3e2;
+  --text-primary: #080909;
+  --text-secondary: #202020;
+  --text-tertiary: #484848;
+}
+
+.dark {
+  --background: #0e1012;
+  --foreground: #ebebeb;
+  --card: #191b1c;
+  --card-foreground: #ebebeb;
+  --popover: #191b1c;
+  --popover-foreground: #ebebeb;
+  --primary: #ebebeb;
+  --primary-foreground: #080909;
+  --secondary: #292c30;
+  --secondary-foreground: #ebebeb;
+  --muted: #0e1012;
+  --muted-foreground: #ebebeb;
+  --accent: #292c30;
+  --accent-foreground: #ebebeb;
+  --destructive: #f43f5e;
+  --destructive-foreground: #fafafa;
+  --border: #292c30;
+  --input: #292c30;
+  --ring: #ebebeb;
+
+  --surface-base: #0e1012;
+  --surface-raised: #191b1c;
+  --border-strong: #292c30;
+  --text-primary: #080909;
+  --text-secondary: #ebebeb;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: var(--border);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+::-moz-selection {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow, 0 1px 2px 0 rgb(0 0 0 / 0.05)), 0 0 0px 1000px var(--background) inset !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow, 0 1px 2px 0 rgb(0 0 0 / 0.05)), 0 0 0px 1000px var(--background) inset !important;
+  -webkit-text-fill-color: var(--foreground) !important;
+  caret-color: var(--foreground) !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+
+
